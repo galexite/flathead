@@ -16,7 +16,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef FH_NO_REGEXP
+#include "config.h"
+
+#ifdef FH_REGEXP
 #include <pcre.h>
 #endif
 
@@ -33,7 +35,7 @@ const int regexp_vector_len = 30;
 int *
 fh_regexp(char *str, char *pattern, int *count, int offset, bool caseless)
 {
-#ifndef FH_NO_REGEXP
+#ifdef FH_REGEXP
   const char *error;
   int rc;
   int error_offset;
@@ -73,7 +75,7 @@ fh_regexp(char *str, char *pattern, int *count, int offset, bool caseless)
 int
 fh_regexp_ncaptures(char *pattern)
 {
-#ifndef FH_NO_REGEXP
+#ifdef FH_REGEXP
   const char *error;
   int error_offset;
   int options = PCRE_JAVASCRIPT_COMPAT;

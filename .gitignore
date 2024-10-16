@@ -6,3 +6,5 @@ tags
 *.o
 node_modules
 .flathead_history
+build/
+.cache/

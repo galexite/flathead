@@ -24,10 +24,16 @@
   #include <getopt.h>
   #include <setjmp.h>
 
-#ifndef FH_NO_REPL
+  #include "config.h"
+
+#if defined(FH_HAVE_READLINE)
   #include <readline/readline.h>
   #include <readline/history.h>
-#endif
+#elif defined(FH_HAVE_EDITLINE)
+  #include <editline/readline.h>
+#else
+  #error No line editor available.
+#endif /* defined(FH_HAVE_READLINE) */
 
   #include "lex.yy.h"
   #include "src/flathead.h"
@@ -1141,10 +1147,6 @@ fh_get_input(char *buf, int size)
 {
   // For the REPL:
   if (fh->opt_interactive) {
-#ifdef FH_NO_REPL
-    fprintf(stderr, "Error: REPL not available. Build with readline.");
-    exit(1);
-#else
     if (fh->opt_keep_history_file) {
       read_history(fh->opt_history_filename);
     }
@@ -1173,7 +1175,6 @@ fh_get_input(char *buf, int size)
 
     strcat(buf, "\n");
     free(line);
-#endif
   }
   // For file or stdin:
   else {

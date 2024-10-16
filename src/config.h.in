@@ -1,0 +1,5 @@
+#cmakedefine FH_GC_PROFILE
+#cmakedefine FH_GC_EXPOSE
+#cmakedefine FH_HAVE_READLINE
+#cmakedefine FH_HAVE_EDITLINE
+#cmakedefine FH_REGEXP
